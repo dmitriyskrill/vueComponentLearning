@@ -5,7 +5,7 @@
     <title>Title</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="app.css">
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+    <script src="vue.js"></script>
     <script src="https://api-maps.yandex.ru/2.1/?apikey=60dbe527-250e-45e9-96a9-171fd30fc4dc&lang=ru_RU"
             type="text/javascript"></script>
 </head>
@@ -15,22 +15,29 @@
         <plan name="super"></plan>
         <hr>
         <plan-picker></plan-picker>
-        
+    
     </div>
 </div>
 
 <script type="text/x-template" id="plan-picker-template">
-    <div class="plans">
+    <ul class="list-group">
         <plan
-                v-for="plan in plans"
+                v-for="(plan, key) in plans"
                 :name="plan"
+                @select="selectPlan"
+                :selected-plan="selectedPlan"
         >
         </plan>
-    </div>
+    </ul>
 </script>
 
 <script type="text/x-template" id="plan-template">
-    <div class="plan">{{name}}</div>
+    <li class="list-group-item"
+        @click="select"
+        :class="{active: isSelected}"
+    >
+        {{name}}
+    </li>
 </script>
 
 <script src="app.js"></script>
